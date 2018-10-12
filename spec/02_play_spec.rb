@@ -5,7 +5,11 @@ describe './lib/tic_tac_toe.rb' do
     it 'asks for players input on a turn of the game' do
       board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
       allow($stdout).to receive(:puts)
+      # allow($stdout).to receive("puts") - cancelling puts, reimplements
+      # puts as an empty method - empty methods can be called and not break. 
       allow(self).to receive(:over?).and_return(false, true)
+      #if it receives just over and doesn't return anything, it will return a default of nil which results in
+      # an infinite loop in the until loop in the over method. 
 
       expect(self).to receive(:gets).at_least(:once).and_return("1")
 
